@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Claude Nav Settings</title>
+    <style>
+      :root {
+        --bg: #2b2a27;
+        --bg-elev: #34332f;
+        --text: #e5e5e5;
+        --text-dim: #a0a09c;
+        --accent: #E07A2F;
+        --border: rgba(255,255,255,0.08);
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        width: 280px;
+        background: var(--bg);
+        color: var(--text);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-size: 13px;
+      }
+      .header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 14px 16px;
+        border-bottom: 1px solid var(--border);
+      }
+      .logo {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 22px;
+        font-weight: 800;
+        color: var(--accent);
+        line-height: 1;
+      }
+      .title { font-size: 14px; font-weight: 600; }
+
+      .body { padding: 10px 16px; }
+
+      .row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 9px 0;
+        border-bottom: 1px solid var(--border);
+      }
+      .row:last-child { border-bottom: none; }
+      .row label { color: var(--text); }
+      .ctrl { display: flex; align-items: center; gap: 6px; }
+      .saved {
+        color: #4caf50;
+        font-size: 12px;
+        opacity: 0;
+        transition: opacity 0.2s ease;
+      }
+      .saved.show { opacity: 1; }
+
+      /* toggle */
+      .toggle {
+        position: relative;
+        width: 32px;
+        height: 18px;
+        background: #555;
+        border-radius: 9px;
+        cursor: pointer;
+        transition: background 0.2s ease;
+      }
+      .toggle::after {
+        content: "";
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        width: 14px;
+        height: 14px;
+        background: #fff;
+        border-radius: 50%;
+        transition: left 0.2s ease;
+      }
+      .toggle.on { background: var(--accent); }
+      .toggle.on::after { left: 16px; }
+
+      /* select */
+      select {
+        background: var(--bg-elev);
+        color: var(--text);
+        border: 1px solid var(--border);
+        border-radius: 5px;
+        padding: 3px 6px;
+        font-size: 12px;
+        outline: none;
+      }
+
+      .footer {
+        text-align: center;
+        font-size: 11px;
+        color: var(--text-dim);
+        padding: 10px 16px 12px;
+        border-top: 1px solid var(--border);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <span class="logo">C</span>
+      <span class="title">Claude Nav</span>
+    </div>
+    <div class="body">
+      <div class="row">
+        <label>启用导航条</label>
+        <div class="ctrl">
+          <span class="saved" data-for="enabled">✓</span>
+          <div class="toggle" data-key="enabled"></div>
+        </div>
+      </div>
+      <div class="row">
+        <label>导航条位置</label>
+        <div class="ctrl">
+          <span class="saved" data-for="position">✓</span>
+          <select data-key="position">
+            <option value="right">右侧</option>
+            <option value="left">左侧</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <label>摘要长度</label>
+        <div class="ctrl">
+          <span class="saved" data-for="summaryLength">✓</span>
+          <select data-key="summaryLength">
+            <option value="10">短 (10字)</option>
+            <option value="20">中 (20字)</option>
+            <option value="30">长 (30字)</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <label>默认折叠</label>
+        <div class="ctrl">
+          <span class="saved" data-for="defaultCollapsed">✓</span>
+          <div class="toggle" data-key="defaultCollapsed"></div>
+        </div>
+      </div>
+      <div class="row">
+        <label>启用悬浮提示</label>
+        <div class="ctrl">
+          <span class="saved" data-for="tooltipEnabled">✓</span>
+          <div class="toggle" data-key="tooltipEnabled"></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">v1.0.0 · Made for Claude.ai</div>
+    <script src="popup.js"></script>
+  </body>
+</html>
